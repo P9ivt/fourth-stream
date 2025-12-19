@@ -105,9 +105,57 @@ footer a{color:var(--accent);text-decoration:none}
         <button onclick="lowMode()">🌐 نت ضعيف</button>  
     </div>  
 </header>  <!-- شريط الأخبار -->  <div class="ticker">  
-    <span>🔴إِلَهِي قَرَعْتُ بَابَ رَحْمَتِكَ بِيَدِ رَجَائِي، وَهَرَبْتُ إِلَيْكَ لاجِئاً مِنْ فَرْطِ أَهْوَائِي، وَعَلَّقْتُ بِأَطْرَافِ حِبَالِكَ أَنَامِلَ وَلائِي، فَاصْفَحِ اللَّهُمَّ عمَّا كُنْتُ أَجْرَمْتُهُ مِنْ زَلَلِي وَخَطَائِي</span>  
+    <span>🔴 البث المباشر مستمر الآن — تابعونا على Fourth Stream — جودة عالية وبث مستقر</span>  
 </div>  <!-- شاشة انتظار -->  <div id="waiting">  
     <div>  
+        <h2>📺 البث سيبدأ بعد قليل</h2>  
+        <p>يرجى الانتظار...</p>  
+    </div>  
+</div>  <div class="container">  
+    <div class="player-box" id="playerBox">  
+        <video  
+            id="player"  
+            class="video-js vjs-default-skin"  
+            controls  
+            autoplay  
+            muted  
+            playsinline  
+            data-setup='{"liveui":true}'>  
+            <source src="https://ktvlive.online/stream/hls/ch1.m3u8" type="application/x-mpegURL">  
+        </video>  
+    </div>  
+</div>  <footer>  
+© 2025 Fourth Stream |  
+<a href="#">Disclaimer</a> |  
+<a href="#">DMCA</a>  
+</footer>  <script>  
+const player = videojs('player');  
+  
+// إظهار المشغل بعد التشغيل  
+player.on('playing', () => {  
+    document.getElementById('waiting').style.display='none';  
+    document.getElementById('playerBox').style.display='block';  
+});  
+  
+// إعادة اتصال تلقائي  
+player.on('error', () => {  
+    setTimeout(()=>{ player.load(); player.play(); },3000);  
+});  
+  
+// وضع النت الضعيف  
+function lowMode(){  
+    player.tech().hls && (player.tech().hls.bandwidth = 300000);  
+    alert("تم تفعيل وضع النت الضعيف");  
+}  
+  
+// حماية أساسية  
+document.addEventListener('keydown', e => {  
+    if(e.keyCode==123 || (e.ctrlKey && e.shiftKey && e.keyCode==73)){  
+        e.preventDefault();  
+    }  
+});  
+</script>  </body>  
+</html>      <div>  
         <h2>📺 البث سيبدأ بعد قليل</h2>  
         <p>يرجى الانتظار...</p>  
     </div>  
@@ -302,5 +350,6 @@ document.addEventListener('keydown',e=>{
 
 </body>
 </html>
+
 
 
