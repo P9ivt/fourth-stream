@@ -1,112 +1,273 @@
-<!DOCTYPE html>  <html lang="ar" dir="rtl">  
-<head>  
-<meta charset="UTF-8">  
-<title>Fourth Stream | بث مباشر</title>  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Video.js -->  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet">  
-<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>  <!-- Chromecast -->  <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>  <!-- Font -->  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">  <style>  
-:root {  
-    --bg:#0a0a0a;  
-    --card:#111;  
-    --accent:#e50914;  
-    --text:#fff;  
-    --muted:#aaa;  
-}  
-*{box-sizing:border-box}  
-body{  
-    margin:0;  
-    font-family:'Cairo',sans-serif;  
-    background:#000;  
-    color:var(--text);  
-}  
-  
-/* Header */  
-header{  
-    display:flex;  
-    justify-content:space-between;  
-    align-items:center;  
-    padding:16px 32px;  
-    background:rgba(0,0,0,.7);  
-    backdrop-filter:blur(10px);  
-    border-bottom:1px solid #222;  
-}  
-.logo{font-size:26px;font-weight:700}  
-.logo span{color:var(--accent)}  
-.controls button{  
-    background:#222;  
-    color:#fff;  
-    border:none;  
-    padding:8px 14px;  
-    border-radius:20px;  
-    cursor:pointer;  
-    margin-right:8px;  
-}  
-  
-/* Waiting Screen */  
-#waiting{  
-    display:flex;  
-    align-items:center;  
-    justify-content:center;  
-    height:60vh;  
-    text-align:center;  
-    color:var(--muted);  
-}  
-  
-/* Player */  
-.container{  
-    max-width:1200px;  
-    margin:30px auto;  
-    padding:0 20px;  
-}  
-.player-box{  
-    background:var(--card);  
-    border-radius:16px;  
-    overflow:hidden;  
-    display:none;  
-}  
-.video-js{width:100%;height:520px}  
-  
-/* Ticker */  
-.ticker{  
-    background:#111;  
-    overflow:hidden;  
-    white-space:nowrap;  
-    border-top:1px solid #222;  
-    border-bottom:1px solid #222;  
-}  
-.ticker span{  
-    display:inline-block;  
-    padding-left:100%;  
-    animation:ticker 20s linear infinite;  
-    color:#0f0;  
-    font-size:14px;  
-}  
-@keyframes ticker{  
-    from{transform:translateX(0)}  
-    to{transform:translateX(-100%)}  
-}  
-  
-/* Footer */  
-footer{  
-    text-align:center;  
-    padding:16px;  
-    font-size:13px;  
-    color:var(--muted);  
-    border-top:1px solid #222;  
-}  
-footer a{color:var(--accent);text-decoration:none}  
-  
-/* Responsive */  
-@media(max-width:768px){  
-    .video-js{height:240px}  
-}  
-</style>  </head>  <body oncontextmenu="return false">  <header>  
-    <div class="logo"><span>Fourth</span> Stream</div>  
-    <div class="controls">  
-        <button onclick="lowMode()">🌐 نت ضعيف</button>  
-    </div>  
-</header>  <!-- شريط الأخبار -->  <div class="ticker">  
-    <span>🔴 البث المباشر مستمر الآن — تابعونا على Fourth Stream — جودة عالية وبث مستقر</span>  
-</div>  <!-- شاشة انتظار -->  <div id="waiting">  
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Fourth Contact | بث ترفيهي مباشر</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Video.js -->
+<link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet">
+<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0a0a0a;
+  --card:#131313;
+  --accent:#d8131f;
+  --text:#ffffff;
+  --muted:#9b9b9b;
+  --success:#1aff6b;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Cairo',sans-serif;
+  background:
+    radial-gradient(circle at top,#141414,#000 65%);
+  color:var(--text);
+}
+
+/* ===== Header ===== */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 32px;
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid #222;
+}
+.brand{
+  display:flex;
+  flex-direction:column;
+}
+.brand .name{
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:.5px;
+}
+.brand .name span{color:var(--accent)}
+.brand .tagline{
+  font-size:12px;
+  color:var(--muted);
+}
+.live-dot{
+  background:var(--accent);
+  font-size:11px;
+  padding:3px 8px;
+  border-radius:6px;
+  margin-right:10px;
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+  0%{opacity:1}
+  50%{opacity:.4}
+  100%{opacity:1}
+}
+.controls button{
+  background:#1b1b1b;
+  color:#fff;
+  border:none;
+  padding:9px 18px;
+  border-radius:22px;
+  cursor:pointer;
+}
+
+/* ===== News Ticker ===== */
+.ticker{
+  background:#0f0f0f;
+  border-top:1px solid #222;
+  border-bottom:1px solid #222;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.ticker span{
+  display:inline-block;
+  padding-left:100%;
+  animation:ticker 22s linear infinite;
+  color:var(--success);
+  font-size:14px;
+}
+@keyframes ticker{
+  from{transform:translateX(0)}
+  to{transform:translateX(-100%)}
+}
+
+/* ===== Waiting Screen ===== */
+#waiting{
+  height:60vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--muted);
+}
+.loader{
+  width:56px;height:56px;
+  border:4px solid #333;
+  border-top-color:var(--accent);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin:0 auto 20px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== Player ===== */
+.container{
+  max-width:1250px;
+  margin:34px auto;
+  padding:0 22px;
+}
+.player-box{
+  background:var(--card);
+  border-radius:20px;
+  overflow:hidden;
+  display:none;
+  box-shadow:0 25px 70px rgba(0,0,0,.65);
+}
+.video-js{
+  width:100%;
+  height:540px;
+}
+.vjs-control-bar{
+  background:linear-gradient(to top,rgba(0,0,0,.85),transparent);
+}
+.video-js .vjs-control-bar{
+  opacity:0;
+  transition:.35s;
+}
+.video-js:hover .vjs-control-bar{
+  opacity:1;
+}
+
+/* ===== Toast ===== */
+#toast{
+  position:fixed;
+  bottom:22px;
+  left:22px;
+  background:#1c1c1c;
+  padding:12px 18px;
+  border-radius:14px;
+  font-size:14px;
+  display:none;
+  box-shadow:0 10px 30px rgba(0,0,0,.55);
+}
+
+/* ===== Footer ===== */
+footer{
+  text-align:center;
+  padding:18px;
+  font-size:13px;
+  color:var(--muted);
+  border-top:1px solid #222;
+}
+footer strong{color:#fff}
+footer a{color:var(--accent);text-decoration:none}
+
+/* ===== Mobile ===== */
+@media(max-width:768px){
+  .video-js{height:240px}
+  header{padding:14px 18px}
+  .brand .name{font-size:20px}
+}
+</style>
+</head>
+
+<body oncontextmenu="return false">
+
+<header>
+  <div class="brand">
+    <div class="name">
+      <span>Fourth</span> Contact
+      <span class="live-dot">LIVE</span>
+    </div>
+    <div class="tagline">حيث يبدأ الترفيه الحقيقي</div>
+  </div>
+
+  <div class="controls">
+    <button onclick="lowMode()">🌐 وضع النت الضعيف</button>
+  </div>
+</header>
+
+<div class="ticker">
+  <span>🎬 Fourth Contact — قناة ترفيهية خاصة — بث عالي الجودة واستقرار مستمر</span>
+</div>
+
+<div id="waiting">
+  <div>
+    <div class="loader"></div>
+    <h2>نحضّر لك تجربة مشاهدة ممتعة</h2>
+    <p>سيبدأ البث تلقائياً فور الجاهزية</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="player-box" id="playerBox">
+    <video
+      id="player"
+      class="video-js vjs-default-skin"
+      controls
+      autoplay
+      muted
+      playsinline
+      data-setup='{"liveui":true}'>
+      <source src="https://ktvlive.online/stream/hls/ch1.m3u8" type="application/x-mpegURL">
+    </video>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<footer>
+<strong>Fourth Contact</strong> © 2025  
+| Entertainment • Quality • Stability  
+| <a href="#">Disclaimer</a> | <a href="#">DMCA</a>
+</footer>
+
+<script>
+const player = videojs('player');
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.innerText=msg;
+  t.style.display='block';
+  setTimeout(()=>t.style.display='none',3000);
+}
+
+/* Show player */
+player.on('playing',()=>{
+  waiting.style.display='none';
+  playerBox.style.display='block';
+});
+
+/* Reconnect UX */
+player.on('error',()=>{
+  toast("⚠️ انقطع البث — جارِ إعادة الاتصال");
+  setTimeout(()=>{player.load();player.play();},3000);
+});
+
+/* Low bandwidth */
+function lowMode(){
+  if(player.tech().hls){
+    player.tech().hls.bandwidth=300000;
+    toast("🌐 تم تفعيل وضع النت الضعيف");
+  }
+}
+
+/* Basic protection */
+document.addEventListener('keydown',e=>{
+  if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&e.keyCode==73)){
+    e.preventDefault();
+  }
+});
+</script>
+
+</body>
+</html></div>  <!-- شاشة انتظار -->  <div id="waiting">  
     <div>  
         <h2>📺 البث سيبدأ بعد قليل</h2>  
         <p>يرجى الانتظار...</p>  
@@ -350,6 +511,7 @@ document.addEventListener('keydown',e=>{
 
 </body>
 </html>
+
 
 
 
