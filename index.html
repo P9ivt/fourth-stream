@@ -51,14 +51,24 @@ body.light header{
   background:#fff;
 }
 
-.logo-img{
-  height:48px;
-  object-fit:contain;
+.logo-box{
+    display:flex;
+    align-items:center;
+    position:relative;
 }
-@media(max-width:768px){
-  .logo-img{height:38px}
+.logo-img{
+    height:42px;
+    max-width:180px;
+    object-fit:contain;
+}
+#fallbackLogo{
+    display:none;
+    font-weight:700;
+    font-size:24px;
+    color:#d8131f;
 }
 
+/* ===== Controls ===== */
 .controls button{
   background:#1b1b1b;
   color:#fff;
@@ -179,11 +189,17 @@ footer{
 <body oncontextmenu="return false">
 
 <header>
-  <img src="logo.png" alt="Fourth Contact Logo" class="logo-img">
+    <div class="logo-box">
+        <img src="https://b.top4top.io/p_3641c3ca10.png" 
+             alt="Fourth Contact" 
+             class="logo-img"
+             onerror="this.style.display='none'; document.getElementById('fallbackLogo').style.display='block';">
+        <span id="fallbackLogo">Fourth Contact</span>
+    </div>
 
-  <div class="controls">
-    <button onclick="toggleTheme()">🌓 الثيم</button>
-  </div>
+    <div class="controls">
+        <button onclick="toggleTheme()">🌙 / ☀️</button>
+    </div>
 </header>
 
 <div class="ticker">
