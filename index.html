@@ -22,12 +22,18 @@
   --success:#1aff6b;
 }
 
+body.light{
+  --bg:#f3f3f3;
+  --card:#ffffff;
+  --text:#000000;
+  --muted:#555;
+}
+
 *{box-sizing:border-box}
 body{
   margin:0;
   font-family:'Cairo',sans-serif;
-  background:
-    radial-gradient(circle at top,#141414,#000 65%);
+  background:var(--bg);
   color:var(--text);
 }
 
@@ -36,54 +42,46 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:18px 32px;
-  background:rgba(0,0,0,.78);
-  backdrop-filter:blur(14px);
+  padding:16px 28px;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(12px);
   border-bottom:1px solid #222;
 }
-.brand{
-  display:flex;
-  flex-direction:column;
+body.light header{
+  background:#fff;
 }
-.brand .name{
-  font-size:26px;
-  font-weight:700;
-  letter-spacing:.5px;
+
+.logo-img{
+  height:48px;
+  object-fit:contain;
 }
-.brand .name span{color:var(--accent)}
-.brand .tagline{
-  font-size:12px;
-  color:var(--muted);
+@media(max-width:768px){
+  .logo-img{height:38px}
 }
-.live-dot{
-  background:var(--accent);
-  font-size:11px;
-  padding:3px 8px;
-  border-radius:6px;
-  margin-right:10px;
-  animation:pulse 1.5s infinite;
-}
-@keyframes pulse{
-  0%{opacity:1}
-  50%{opacity:.4}
-  100%{opacity:1}
-}
+
 .controls button{
   background:#1b1b1b;
   color:#fff;
   border:none;
-  padding:9px 18px;
+  padding:8px 18px;
   border-radius:22px;
   cursor:pointer;
 }
+body.light .controls button{
+  background:#ddd;
+  color:#000;
+}
 
-/* ===== News Ticker ===== */
+/* ===== Ticker ===== */
 .ticker{
   background:#0f0f0f;
   border-top:1px solid #222;
   border-bottom:1px solid #222;
   overflow:hidden;
   white-space:nowrap;
+}
+body.light .ticker{
+  background:#eaeaea;
 }
 .ticker span{
   display:inline-block;
@@ -97,7 +95,7 @@ header{
   to{transform:translateX(-100%)}
 }
 
-/* ===== Waiting Screen ===== */
+/* ===== Waiting ===== */
 #waiting{
   height:60vh;
   display:flex;
@@ -112,33 +110,33 @@ header{
   border-top-color:var(--accent);
   border-radius:50%;
   animation:spin 1s linear infinite;
-  margin:0 auto 20px;
+  margin:0 auto 18px;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ===== Player ===== */
 .container{
-  max-width:1250px;
-  margin:34px auto;
-  padding:0 22px;
+  max-width:1200px;
+  margin:30px auto;
+  padding:0 20px;
 }
 .player-box{
   background:var(--card);
-  border-radius:20px;
+  border-radius:18px;
   overflow:hidden;
   display:none;
-  box-shadow:0 25px 70px rgba(0,0,0,.65);
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
 }
 .video-js{
   width:100%;
-  height:540px;
+  height:520px;
 }
 .vjs-control-bar{
   background:linear-gradient(to top,rgba(0,0,0,.85),transparent);
 }
 .video-js .vjs-control-bar{
   opacity:0;
-  transition:.35s;
+  transition:.3s;
 }
 .video-js:hover .vjs-control-bar{
   opacity:1;
@@ -147,32 +145,33 @@ header{
 /* ===== Toast ===== */
 #toast{
   position:fixed;
-  bottom:22px;
-  left:22px;
+  bottom:20px;
+  left:20px;
   background:#1c1c1c;
   padding:12px 18px;
   border-radius:14px;
   font-size:14px;
   display:none;
-  box-shadow:0 10px 30px rgba(0,0,0,.55);
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+body.light #toast{
+  background:#fff;
+  color:#000;
 }
 
 /* ===== Footer ===== */
 footer{
   text-align:center;
-  padding:18px;
+  padding:16px;
   font-size:13px;
   color:var(--muted);
   border-top:1px solid #222;
 }
-footer strong{color:#fff}
-footer a{color:var(--accent);text-decoration:none}
 
 /* ===== Mobile ===== */
 @media(max-width:768px){
   .video-js{height:240px}
-  header{padding:14px 18px}
-  .brand .name{font-size:20px}
+  header{padding:12px 16px}
 }
 </style>
 </head>
@@ -180,21 +179,15 @@ footer a{color:var(--accent);text-decoration:none}
 <body oncontextmenu="return false">
 
 <header>
-  <div class="brand">
-    <div class="name">
-      <span>Fourth</span> Contact
-      <span class="live-dot">LIVE</span>
-    </div>
-    <div class="tagline">حيث يبدأ الترفيه الحقيقي</div>
-  </div>
+  <img src="logo.png" alt="Fourth Contact Logo" class="logo-img">
 
   <div class="controls">
-    <button onclick="lowMode()">🌐 وضع النت الضعيف</button>
+    <button onclick="toggleTheme()">🌓 الثيم</button>
   </div>
 </header>
 
 <div class="ticker">
-  <span>🎬 Fourth Contact — قناة ترفيهية خاصة — بث عالي الجودة واستقرار مستمر</span>
+  <span>🎬 Fourth Contact — قناة ترفيهية خاصة — جودة عالية واستقرار دائم</span>
 </div>
 
 <div id="waiting">
@@ -223,9 +216,7 @@ footer a{color:var(--accent);text-decoration:none}
 <div id="toast"></div>
 
 <footer>
-<strong>Fourth Contact</strong> © 2025  
-| Entertainment • Quality • Stability  
-| <a href="#">Disclaimer</a> | <a href="#">DMCA</a>
+Fourth Contact © 2025 — Entertainment • Quality • Stability
 </footer>
 
 <script>
@@ -238,24 +229,23 @@ function toast(msg){
   setTimeout(()=>t.style.display='none',3000);
 }
 
-/* Show player */
 player.on('playing',()=>{
   waiting.style.display='none';
   playerBox.style.display='block';
 });
 
-/* Reconnect UX */
 player.on('error',()=>{
   toast("⚠️ انقطع البث — جارِ إعادة الاتصال");
   setTimeout(()=>{player.load();player.play();},3000);
 });
 
-/* Low bandwidth */
-function lowMode(){
-  if(player.tech().hls){
-    player.tech().hls.bandwidth=300000;
-    toast("🌐 تم تفعيل وضع النت الضعيف");
-  }
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  toast(
+    document.body.classList.contains('light')
+    ? "☀️ تم تفعيل الثيم الفاتح"
+    : "🌙 تم تفعيل الثيم الداكن"
+  );
 }
 
 /* Basic protection */
